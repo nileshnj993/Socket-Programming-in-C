@@ -1,0 +1,66 @@
+CLIENT-SERVER MODEL
+-------------------
+
+Client uses socket(), connect(), write(),read() and close() 
+
+Server uses socket(), connect(), write(), read(), close(), bind(), listen() and accept()
+
+When a server uses close(), all clients automatically close(), but vice versa is not true as server may be handling multiple clients.
+
+When server is writing, client must be reading and vice versa.
+
+IMPORTANT FUNCTIONS - in types.h and socket.h
+---------------------------------------------
+
+SOCKET
+------
+int sockfd = socket(internet domain, int type, int protocol) - sockfd is a socket descriptor
+internet domain is usually AF_INET(IPv4) or AF_INET6(IPv6)
+type is usually SOCK_STREAM(TCP) or SOCK_DGRAM(UDP)
+protocol is 0(set to default)
+
+BIND
+----
+Bind helps in assigning address to a socket descriptor.
+int bind(int sockfd, struct sockaddr *addr, socklen_t addrlen)
+
+DEFAULT SOCKET ADDRESS STRUCTURE
+-------------------------------- 
+struct sockaddr{ 
+	sa_family_t sa_family;
+	char sa_data[14];
+}
+// THIS HELPS US HAVE A COMMON STRUCTURE FOR ALL PROTOCOLS. WE JUST NEED TO TYPECAST.
+
+LISTEN
+------
+int listen(int sockfd, int backlog)
+It listens for a connection on the socket. It marks socket marked by sockfd as passive socket, waiting for requests that will be accepted by accept().
+Backlog is sum of complete(ACK and SYN over) and incomplete queue(Three way handshake still happening) - it is the max number of connections allowed to prevent ddos (usually 5-15)
+
+ACCEPT
+------
+int newsockfd = accept(sockfd, (struct sockaddr *)&addr,&addrlen);
+New socket descriptor created. One for each client.
+This waits for client to send connect request and then responds by creating an new socket descriptor to do operations.
+
+CONNECT
+-------
+int conn_status = connect(int sockfd, struct sockaddr *addr, socklen_t addrlen)
+0 if connection successful, -1 if failure
+
+READ
+----
+read(newsockfd, buffer, buffer_size)
+Buffer is the string in which data of the message is stored. Message can't be larger than buffer_size
+
+WRITE
+-----
+write(newsockfd, buffer, buffer_size)
+
+Read and Write are used for communication. Send and Receive can also be used. They contain a 4th argument called flag.
+
+CLOSE
+-----
+closes the connection
+int close_status = close(int sockfd)

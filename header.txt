@@ -1,0 +1,18 @@
+EXPLAINING HEADER FILES AND THEIR FUNCTIONALITY
+-----------------------------------------------
+
+stdio.h - Used for input and output operations(printf,scanf)
+
+sys/types.h - Definitions of lots of data types used in system calls like size_t, uint_32 etc. It helps declare other headers
+
+sys/socket.h - Includes socket related structure definitons - sockaddr structure(sin_family, sin_port etc. defined here)
+
+netinet/in.h - Contains constants and structures used in internet domain addresses like sockaddr_in
+
+stdlib.h - General functions, variable types, predefined functions like atoi to convert string to integer etc.
+
+string.h - Contains string functions. We use memset, memcpy
+
+arpa/inet.h - Contains functions like ntoa, ptoa etc to convert dotted decimal to numeric values or inet_addr
+
+unistd.h - contains read, write, send, recv etc
