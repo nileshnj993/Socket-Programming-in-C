@@ -42,7 +42,7 @@ ACCEPT
 ------
 int newsockfd = accept(sockfd, (struct sockaddr *)&addr,&addrlen);
 New socket descriptor created. One for each client.
-This waits for client to send connect request and then responds by creating an new socket descriptor to do operations.
+This waits for client to send connect request and then responds by creating a new socket descriptor to do operations.
 
 CONNECT
 -------
