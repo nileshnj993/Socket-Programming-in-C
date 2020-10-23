@@ -1,0 +1,54 @@
+int getsockopt(int sockfd, int level, int optname, void *optval, socklen_t *optlen)
+int seetsockopt(int sockfd, int level, int optname, void *optval, socklen_t *optlen)
+
+level - SOL_SOCKET - helps interpret the option
+
+optval - pointer to a variable from which new val of option is fetched by getsockopt or variable in which new val of option is set by setsockopt. Each option has a unique value (1 for SO_BROADCAST, "eth1" for SO_BINDTODEVICE) etc.
+
+optlen - size of option variable
+---------------------------------------------------------------------
+
+SO_BROADCAST
+------------
+enables or disables ability of process to send broadcast message. works only in UDP and does nothing in TCP.
+
+SO_DEBUG
+--------
+if enabled, kernel tracks the events of the socket (packets sent/received). Only works on TCP sockets.
+
+SO_DONTROUTE
+------------
+if enabled, outgoing packets bypass normal routing mechanisms of underlying protocol
+
+SO_ERROR
+--------
+when error occurs, this gets enabled for that socket. If we suspect an error has occured, we can do getsockopt for the socket, and if optval gives the value that indicates SO_ERROR option, then error has occured.
+
+SO_KEEPALIVE
+------------
+waits for specified time(usually 2 hrs), and then TCP sends a keepalive probe to peer to check if everything is alright.
+
+ACK - everything is ok
+RST - peer has crashed and rebooted - gives error code ECONNRESET
+no response - ETIMEOUT - socket closed
+
+SO_LINGER
+---------
+specifies how clos function operates for connection oriented protocol. by default, close returns immediately.
+
+struct linger{
+	int l_onoff; // 0 is off, non zero is on
+	int l_linger; // linger time
+}
+
+if l_onoff == 0 -> l_linger is ignored
+if l_onoff != 0 -> l_linger is 0, TCP aborts the connection when close() is called and discards remaining data in buffer
+if l_onoff != 0 -> l_linger != 0, it'll wait for remaining data to be sent or linger time to expire.
+
+shutdown()
+int shutdown(int sockfd, int how);
+
+how: Specifies the type of shutdown. The values are as follows:
+SHUT_RD: Disables further receive operations.
+SHUT_WR: Disables further send operations.
+SHUT_RDWR: Disables further send and receive operations.

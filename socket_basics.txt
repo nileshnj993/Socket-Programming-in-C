@@ -64,3 +64,4 @@ CLOSE
 -----
 closes the connection
 int close_status = close(int sockfd)
+if close is executed before data is completely transmitted, data being sent still reaches the other end

@@ -1,0 +1,18 @@
+
+GETADDRINFO
+-----------
+int getaddrinfo(char *node, char *service, struct addrinfo *hints, struct addrinfo **result)
+
+node - host name/ip address
+service - port number or service in /etc/services(ftp)
+hints - points to a struct addrinfo with known info
+
+This is used to get address info with a given host name and service.
+
+GETSOCKNAME, GETPEERNAME
+------------------------
+int getsockname(int sockfd, struct sockaddr *localaddr, socklen_t *addrlen)
+This returns local address associated with a socket
+
+int getpeername(int sockfd, struct sockaddr *peeraddr, socklen_t *addrlen)
+This returns foreign protocol address associated with a socket
