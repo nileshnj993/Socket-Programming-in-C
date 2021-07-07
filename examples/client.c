@@ -44,6 +44,7 @@ int main(int argc, char *argv[]){
 	while(1){
 		memset(buffer,'\0',sizeof(buffer));
 		fgets(buffer,sizeof(buffer),stdin);
+		
 		n = write(sockfd, buffer, strlen(buffer));
 		if(n<0){
 			error("Error on writing!");

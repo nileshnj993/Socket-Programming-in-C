@@ -1,0 +1,3 @@
+This is just a test. We are exploring files in socket programming lab. Hello world, execute the p
+a program can access the files only if they have read access enabled.
+rogram for testing purposes.

@@ -14,6 +14,7 @@ void error(const char *msg){
 int main(int argc, char *argv[]){ // argc = number of arguments and argv is an array of arguments
 	// argv will contain file name and port number as arguments
 	// argc = 2
+	printf("%s","Listening on 127.0.0.1:8000\n");
 	if(argc<2){
 		error("Port number not provided! Program terminated.");
 	}
@@ -45,6 +46,7 @@ int main(int argc, char *argv[]){ // argc = number of arguments and argv is an a
 	}
 
 	listen(sockfd,5); // 5 is backlog
+
 	client_length = sizeof(clientaddr);
 	newsockfd = accept(sockfd, (struct sockaddr *)&clientaddr, &client_length);
 	// this accepts connections from clients of structure address clientaddr and length client_length.
